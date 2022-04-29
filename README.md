@@ -7,7 +7,7 @@
 - [ ] Sparse matrix
 - [ ] Linear & non-linear ds
 - [x] Stack
-- [ ] Queue (simple, circular)
+- [x] Queue (simple, circular)
 - [x] Single linked list
 - [x] Circular linked list
 - [x] Double linked list
