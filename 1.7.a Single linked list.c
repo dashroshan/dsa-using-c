@@ -19,21 +19,20 @@ void main()
     node *llHead = create();
     int choice, toSearch, toInsert, index;
 loop:
-    // Start of the menu loop
     printf("\n1: Length\n2: Display\n3: Search\n4: Insert\n5: Delete\n\nEnter your choice: ");
     scanf("%d", &choice);
     system("cls");
     switch (choice)
     {
-    case 1: // Show length of the linked list
+    case 1:
         printf("Length of the linked list: %d\n", length(llHead));
         goto loop;
 
-    case 2: // Display the linked list
+    case 2:
         display(llHead);
         goto loop;
 
-    case 3: // Search the index of an element
+    case 3:
         printf("Enter element to search: ");
         scanf("%d", &toSearch);
         index = search(llHead, toSearch);
@@ -43,14 +42,14 @@ loop:
             printf("%d found at index %d\n", toSearch, index);
         goto loop;
 
-    case 4: // Insert a new element at an index
+    case 4:
         printf("Enter element and index where it is to be inserted: ");
         scanf("%d %d", &toInsert, &index);
         insert(&llHead, toInsert, index);
         printf("%d inserted at index %d\n", toInsert, index);
         goto loop;
 
-    case 5: // Delete element at an index
+    case 5:
         printf("Enter element index to delete: ");
         scanf("%d", &index);
         delete (&llHead, index);
