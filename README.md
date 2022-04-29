@@ -7,7 +7,7 @@
 
 ### Module 1
 
-- [ ] Arrays
+- [x] Arrays
 - [ ] Strings
 - [ ] Sparse matrices
 - [ ] Linear & non-linear ds
