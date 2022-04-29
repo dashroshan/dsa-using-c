@@ -1,3 +1,8 @@
+/*
+Write a C program for input, display, addition, subtraction, multiplication, and
+transpose of matrices.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

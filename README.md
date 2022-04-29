@@ -1,12 +1,13 @@
 # DSA using C
 
-- **Book :** Data Structures Using C
+- **Reference book:** Data Structures Using C
 - **Author :** E. Balagurusamy
 
 ## Topics to Cover
 
 ### Module 1
 
+- [x] C recap
 - [x] Arrays
 - [ ] Strings
 - [ ] Sparse matrices
