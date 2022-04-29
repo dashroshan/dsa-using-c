@@ -51,6 +51,9 @@ loop:
         display(mTra2, r2, c2);
         printf("\n");
         goto loop;
+
+    default:
+        goto loop;
     }
 }
 

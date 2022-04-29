@@ -1,20 +1,16 @@
 # DSA using C
 
-**Reference book:** Data Structures Using C by E. Balagurusamy
-
-## Topics to Cover
-
 ### Module 1
 
 - [x] Array
 - [ ] String
 - [ ] Sparse matrix
 - [ ] Linear & non-linear ds
-- [ ] Stack
+- [x] Stack
 - [ ] Queue (simple, circular)
 - [x] Single linked list
 - [x] Circular linked list
-- [ ] Double linked list
+- [x] Double linked list
 - [ ] Operations on polynomials
 - [ ] Dyanmic storage management(garbage collection and compaction)
 - [ ] Infix to postfix conversion

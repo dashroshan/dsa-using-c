@@ -53,6 +53,9 @@ loop:
     case 5:
         display(array, size);
         goto loop;
+
+    default:
+        goto loop;
     }
 }
 

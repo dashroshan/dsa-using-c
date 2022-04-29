@@ -55,6 +55,9 @@ loop:
         delete (&llHead, index);
         printf("Element deleted\n");
         goto loop;
+
+    default:
+        goto loop;
     }
 }
 
@@ -83,14 +86,18 @@ void display(node *head)
 {
     printf("Linked list: ");
     node *list = head;
+    printf(" o--> ");
     while (1)
     {
         printf("%d", list->num);
         if (list->next == head)
+        {
+            printf(" --o");
             break;
+        }
         else
             list = list->next;
-        printf(", ");
+        printf(" -> ");
     }
     printf("\n");
 }

@@ -5,6 +5,7 @@ typedef struct nodeStruct
 {
     int num;
     struct nodeStruct *next;
+    struct nodeStruct *prev;
 } node;
 
 node *create(void);
@@ -64,9 +65,10 @@ loop:
 node *create(void)
 {
     int num;
-    node *head = (node *)malloc(sizeof(node)), *list = head;
+    node *head = (node *)malloc(sizeof(node)), *list = head, *prev;
     printf("Enter elements (-999 to stop): ");
     scanf("%d", &list->num);
+    list->prev = NULL;
     while (1)
     {
         scanf("%d", &num);
@@ -76,8 +78,10 @@ node *create(void)
             break;
         }
         list->next = (node *)malloc(sizeof(node));
+        prev = list;
         list = list->next;
         list->num = num;
+        list->prev = prev;
     }
     return head;
 }
@@ -93,7 +97,7 @@ void display(node *head)
             break;
         else
             list = list->next;
-        printf(" -> ");
+        printf(" <-> ");
     }
     printf("\n");
 }
@@ -164,6 +168,7 @@ void delete (node **head, int index)
     if (index == 0)
     {
         *head = (*head)->next;
+        (*head)->prev = NULL;
         return;
     }
     node *list = *head;
@@ -173,6 +178,8 @@ void delete (node **head, int index)
         if (currentIndex == index - 1)
         {
             node *nodeAfterDeletedNode = list->next->next;
+            if (list->next->next != NULL)
+                nodeAfterDeletedNode->prev = list;
             free(list->next);
             list->next = nodeAfterDeletedNode;
             break;
