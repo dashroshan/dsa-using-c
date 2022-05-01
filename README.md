@@ -4,7 +4,7 @@
 
 - [x] Array
 - [x] String
-- [ ] Sparse matrix
+- [x] Sparse matrix
 - [ ] Linear & non-linear ds
 - [x] Stack
 - [x] Queue (simple, circular)
