@@ -3,14 +3,12 @@
 ### Module 1
 
 - [x] Array
-- [ ] String
+- [x] String
 - [ ] Sparse matrix
 - [ ] Linear & non-linear ds
 - [x] Stack
 - [x] Queue (simple, circular)
-- [x] Single linked list
-- [x] Circular linked list
-- [x] Double linked list
+- [x] Linked list (single, circular, double)
 - [ ] Operations on polynomials
 - [ ] Dyanmic storage management(garbage collection and compaction)
 - [ ] Infix to postfix conversion
