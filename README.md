@@ -5,11 +5,10 @@
 - [x] Array
 - [x] String
 - [x] Sparse matrix
-- [ ] Linear & non-linear ds
 - [x] Stack
 - [x] Queue (simple, circular)
 - [x] Linked list (single, circular, double)
-- [ ] Operations on polynomials
+- [x] Operations on polynomials
 - [ ] Dyanmic storage management(garbage collection and compaction)
 - [ ] Infix to postfix conversion
 - [ ] Postfix expression evalution
