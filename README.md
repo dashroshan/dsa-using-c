@@ -10,12 +10,12 @@
 - [x] Linked list (single, circular, double)
 - [x] Operations on polynomials
 - [ ] Dyanmic storage management(garbage collection and compaction)
-- [ ] Infix to postfix conversion
-- [ ] Postfix expression evalution
+- [x] Infix to postfix conversion
+- [x] Postfix expression evalution
 
 ### Module 2
 
-- [ ] Tree terminology
+- [x] Tree terminology
 - [ ] Binary tree
 - [ ] Binary search tree
 - [ ] General tree
