@@ -16,15 +16,15 @@
 ### Module 2
 
 - [x] Tree terminology
-- [ ] Binary tree
-- [ ] Binary search tree
+- [x] Binary tree
+- [x] Binary search tree
 - [ ] General tree
 - [ ] B tree
 - [ ] B+ tree
 - [ ] AVL tree
 - [ ] Complete binary tree (heap)
 - [ ] Tree representation
-- [ ] Tree traversal
+- [x] Tree traversal
 - [ ] Operation on BST and AVL tree (find, insertion, deletion)
 - [ ] Expression manipulation
 
