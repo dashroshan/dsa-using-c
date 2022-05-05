@@ -38,13 +38,13 @@
 - [ ] Minimum spanning tree
 - [ ] Shortest path (Warshall's algorithm)
 - [ ] All pairs shortest path (Dijkstra's algorithm)
-- [ ] Bubble sort
-- [ ] Selection sort
-- [ ] Insertion sort
+- [x] Bubble sort
+- [x] Selection sort
+- [x] Insertion sort
 - [ ] Quick sort
 - [ ] Merge sort
 - [ ] Heap sort
 - [ ] Radix sort
-- [ ] Linear and Binary search
+- [x] Linear and Binary search
 - [ ] Hashing techniques
 - [ ] Hash functions
