@@ -21,7 +21,7 @@ typedef struct nodeStruct
 
 int length(node *);
 void display(node *);
-void *create(node **);
+void create(node **);
 int delete (node **, int);
 int insert(node **, int, int);
 
@@ -167,7 +167,7 @@ void display(node *first)
     printf(" --+\n");
 }
 
-void *create(node **first)
+void create(node **first)
 {
     int num;
     printf("Enter elements (-999 to stop): ");
