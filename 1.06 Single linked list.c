@@ -1,185 +1,317 @@
+/*
+Create a linked list with some elements and perform the following operations:
+
+a. Insert element at the beginning
+b. Insert element at the end
+c. Insert element in the middle
+d. Delete element at the beginning
+e. Delete element at the end
+f. Delete element in the middle
+g. Display all elements
+h. Search an element by value
+i: Sort the linked list
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct nodeStruct
 {
-    int num;
-    struct nodeStruct *next;
+    int info;
+    struct nodeStruct *link;
 } node;
 
 node *create(void);
-void display(node *head);
-int search(node *head, int num);
-int length(node *head);
-void insert(node **head, int num, int index);
-void delete (node **head, int index);
+void insertAtBeginning(node **, int);
+void insertAtEnd(node **, int);
+int insertAtMiddle(node **, int, int);
+int deleteFirst(node **);
+int deleteLast(node **);
+int deleteMiddle(node **, int);
+void display(node *);
+int searchElement(node *, int);
+void swap(node *, node *);
+void sort(node *);
 
-void main()
+int main()
 {
-    node *llHead = create();
-    int choice, toSearch, toInsert, index;
+    node *first = create();
+    char choice;
+    int value, index;
 loop:
-    printf("\n1: Length\n2: Display\n3: Search\n4: Insert\n5: Delete\n\nEnter your choice: ");
-    scanf("%d", &choice);
+    printf("\na: Insert element at the beginning\nb: Insert element at the end\nc: Insert element in the middle\nd: Delete element at the beginning\ne: Delete element at the end\nf: Delete element in the middle\ng: Display all elements\nh: Search an element by value\ni: Sort the linked list\n\nEnter your choice: ");
+    fflush(stdin);
+    scanf("%c", &choice);
+    fflush(stdin);
     system("cls");
     switch (choice)
     {
-    case 1:
-        printf("Length of the linked list: %d\n", length(llHead));
+    case 'a':
+        printf("Enter value to insert at beginning: ");
+        scanf("%d", &value);
+        insertAtBeginning(&first, value);
+        printf("%d inserted at the beginning\n", value);
         goto loop;
-
-    case 2:
-        display(llHead);
+    case 'b':
+        printf("Enter value to insert at end: ");
+        scanf("%d", &value);
+        insertAtEnd(&first, value);
+        printf("%d inserted at the end\n", value);
         goto loop;
-
-    case 3:
-        printf("Enter element to search: ");
-        scanf("%d", &toSearch);
-        index = search(llHead, toSearch);
-        if (index == -1)
-            printf("%d not found in the linked list\n", toSearch);
+    case 'c':
+        printf("Enter value to insert and index: ");
+        scanf("%d %d", &value, &index);
+        if (insertAtMiddle(&first, value, index))
+            printf("%d inserted at index %d\n", value, index);
         else
-            printf("%d found at index %d\n", toSearch, index);
+            printf("Index out of bound\n");
         goto loop;
-
-    case 4:
-        printf("Enter element and index where it is to be inserted: ");
-        scanf("%d %d", &toInsert, &index);
-        insert(&llHead, toInsert, index);
-        printf("%d inserted at index %d\n", toInsert, index);
+    case 'd':
+        value = deleteFirst(&first);
+        if (value == -99999)
+            printf("Empty linked list\n");
+        else
+            printf("%d at the first position deleted\n", value);
         goto loop;
-
-    case 5:
-        printf("Enter element index to delete: ");
+    case 'e':
+        value = deleteLast(&first);
+        if (value == -99999)
+            printf("Empty linked list\n");
+        else
+            printf("%d at the last position deleted\n", value);
+        goto loop;
+    case 'f':
+        printf("Enter index of element of delete: ");
         scanf("%d", &index);
-        delete (&llHead, index);
-        printf("Element deleted\n");
+        value = deleteMiddle(&first, index);
+        if (value == -99999)
+            printf("Empty linked list\n");
+        else if (value == -99998)
+            printf("Index out of bound\n");
+        else
+            printf("%d at the last position deleted\n", value);
         goto loop;
-
+    case 'g':
+        display(first);
+        goto loop;
+    case 'h':
+        printf("Enter an element to search: ");
+        scanf("%d", &value);
+        index = searchElement(first, value);
+        if (index == -2)
+            printf("Empty linked list\n");
+        else if (index == -1)
+            printf("Element not found\n");
+        else
+            printf("%d found at index %d\n", value, index);
+        goto loop;
+    case 'i':
+        sort(first);
+        printf("Linked list sorted\n");
+        goto loop;
     default:
+        printf("Invalid choice\n");
         goto loop;
     }
+    return 0;
 }
 
 node *create(void)
 {
     int num;
-    node *head = (node *)malloc(sizeof(node)), *list = head;
+    node *first = (node *)malloc(sizeof(node)), *llptr = first;
     printf("Enter elements (-999 to stop): ");
-    scanf("%d", &list->num);
+    scanf("%d", &llptr->info);
     while (1)
     {
         scanf("%d", &num);
         if (num == -999)
         {
-            list->next = NULL;
+            llptr->link = NULL;
             break;
         }
-        list->next = (node *)malloc(sizeof(node));
-        list = list->next;
-        list->num = num;
+        llptr->link = (node *)malloc(sizeof(node));
+        llptr = llptr->link;
+        llptr->info = num;
     }
-    return head;
+    return first;
 }
 
-void display(node *head)
+void insertAtBeginning(node **first, int value)
 {
-    printf("Linked list: ");
-    node *list = head;
+    node *new = (node *)malloc(sizeof(node));
+    new->info = value;
+    new->link = *first;
+    *first = new;
+}
+
+void insertAtEnd(node **first, int value)
+{
+    node *new = (node *)malloc(sizeof(node)), *llptr = *first;
+    new->info = value;
+    new->link = NULL;
+    if (*first == NULL)
+    {
+        *first = new;
+        return;
+    }
+    while (llptr->link != NULL)
+        llptr = llptr->link;
+    llptr->link = new;
+}
+
+int insertAtMiddle(node **first, int value, int index)
+{
+    int curIndex = 0;
+    node *new = (node *)malloc(sizeof(node)), *llptr = *first, *prev;
+    new->info = value;
+    if (index == 0)
+    {
+        new->link = *first;
+        *first = new;
+        return 1;
+    }
+    while (llptr->link != NULL)
+    {
+        prev = llptr;
+        llptr = llptr->link;
+        curIndex++;
+        if (index == curIndex)
+        {
+            prev->link = new;
+            new->link = llptr;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int deleteFirst(node **first)
+{
+    if (*first == NULL)
+        return -99999;
+    int deletedVal = (*first)->info;
+    node *toFree = *first;
+    *first = (*first)->link;
+    free(toFree);
+    return deletedVal;
+}
+
+int deleteLast(node **first)
+{
+    if (*first == NULL)
+        return -99999;
+    node *llptr = *first, *prev = NULL;
+    while (llptr->link != NULL)
+    {
+        prev = llptr;
+        llptr = llptr->link;
+    }
+    int deletedVal = llptr->info;
+    free(llptr);
+    if (prev == NULL)
+        *first = NULL;
+    else
+        prev->link = NULL;
+    return deletedVal;
+}
+
+int deleteMiddle(node **first, int index)
+{
+    int curIndex = 0, deletedVal;
+    if (*first == NULL)
+        return -99999;
+    if (index == 0)
+    {
+        deletedVal = (*first)->info;
+        node *toFree = *first;
+        *first = (*first)->link;
+        free(toFree);
+        return deletedVal;
+    }
+    node *llptr = *first, *nodeAfterDel;
     while (1)
     {
-        printf("%d", list->num);
-        if (list->next == NULL)
+        if (curIndex == index - 1)
+        {
+            deletedVal = llptr->link->info;
+            node *toFree = llptr->link;
+            nodeAfterDel = llptr->link->link;
+            llptr->link = nodeAfterDel;
+            free(toFree);
+            return deletedVal;
+        }
+        if (llptr->link == NULL)
+            return -99998;
+        llptr = llptr->link;
+        curIndex++;
+    }
+}
+
+void display(node *first)
+{
+    if (first == NULL)
+    {
+        printf("Empty linked list\n");
+        return;
+    }
+    printf("Linked list: ");
+    node *llptr = first;
+    while (1)
+    {
+        printf("%d", llptr->info);
+        if (llptr->link == NULL)
             break;
         else
-            list = list->next;
+            llptr = llptr->link;
         printf(" -> ");
     }
     printf("\n");
 }
 
-int search(node *head, int num)
+int searchElement(node *first, int element)
 {
-    node *list = head;
+    if (first == NULL)
+        return -2;
     int index = 0;
+    node *llptr = first;
     while (1)
     {
-        if (list->num == num)
+        if (llptr->info == element)
             return index;
+        else if (llptr->link == NULL)
+            return -1;
+        llptr = llptr->link;
         index++;
-        if (list->next == NULL)
-            break;
-        else
-            list = list->next;
     }
-    return -1;
 }
 
-int length(node *head)
+void swap(node *a, node *b)
 {
-    node *list = head;
-    int index = 0;
-    while (1)
-    {
-        index++;
-        if (list->next == NULL)
-            break;
-        else
-            list = list->next;
-    }
-    return index;
+    int temp = a->info;
+    a->info = b->info;
+    b->info = temp;
 }
 
-void insert(node **head, int num, int index)
+void sort(node *first)
 {
-    if (index == 0)
-    {
-        node *first = (node *)malloc(sizeof(node));
-        first->num = num;
-        first->next = *head;
-        *head = first;
+    int swapped;
+    node *ptr1, *lptr = NULL;
+    if (first == NULL)
         return;
-    }
-    node *list = *head;
-    int currentIndex = 0;
-    while (1)
+    do
     {
-        if (currentIndex == index - 1)
+        swapped = 0;
+        ptr1 = first;
+        while (ptr1->link != lptr)
         {
-            node *toInsert = (node *)malloc(sizeof(node));
-            toInsert->num = num;
-            toInsert->next = list->next;
-            list->next = toInsert;
-            break;
+            if (ptr1->info > ptr1->link->info)
+            {
+                swap(ptr1, ptr1->link);
+                swapped = 1;
+            }
+            ptr1 = ptr1->link;
         }
-        if (list->next == NULL)
-            return;
-        list = list->next;
-        currentIndex++;
-    }
-}
-
-void delete (node **head, int index)
-{
-    if (index == 0)
-    {
-        *head = (*head)->next;
-        return;
-    }
-    node *list = *head;
-    int currentIndex = 0;
-    while (1)
-    {
-        if (currentIndex == index - 1)
-        {
-            node *nodeAfterDeletedNode = list->next->next;
-            free(list->next);
-            list->next = nodeAfterDeletedNode;
-            break;
-        }
-        if (list->next == NULL)
-            return;
-        list = list->next;
-        currentIndex++;
-    }
+        lptr = ptr1;
+    } while (swapped);
 }

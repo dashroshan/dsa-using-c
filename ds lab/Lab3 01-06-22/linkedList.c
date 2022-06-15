@@ -5,7 +5,7 @@ a. Insert element at the beginning
 b. Insert element at the end
 c. Insert element in the middle
 d. Delete element at the beginning
-e. Delete element at the en  d
+e. Delete element at the end
 f. Delete element in the middle
 g. Display all elements
 h. Search an element by value
