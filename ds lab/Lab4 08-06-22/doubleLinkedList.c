@@ -1,5 +1,5 @@
 /*
-Create a circular linked list, insert 10 elements and perform the following operations:
+Create a double linked list, insert 10 elements and perform the following operations:
 
 a. Insert at beginning
 b. Insert at end
