@@ -12,11 +12,11 @@ typedef struct nodeStruct
 } node;
 
 void input(node **);
-int lowestPow(node *);
 void display(node *);
+int lowestPow(node *);
+void deleteZeroTerms(node **);
 void add(node *, node *, node **);
 void insertAtEnd(node **, int, int);
-void deleteZeroTerms(node **);
 void multiply(node *, node *, node **);
 void addToCoeffAtIndex(node **, int, int);
 
