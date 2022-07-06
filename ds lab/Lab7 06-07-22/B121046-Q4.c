@@ -26,18 +26,18 @@ int main()
 
 node *create(void)
 {
-    int num, c;
+    int num;
     node *first = (node *)malloc(sizeof(node)), *llptr = first;
-    printf("Enter elements: ");
-    scanf("%d%c", &llptr->info, &c);
+    printf("Enter elements (-999 to stop): ");
+    scanf("%d", &llptr->info);
     while (1)
     {
-        if (c != ' ')
+        scanf("%d", &num);
+        if (num == -999)
         {
             llptr->link = NULL;
             break;
         }
-        scanf("%d%c", &num, &c);
         llptr->link = (node *)malloc(sizeof(node));
         llptr = llptr->link;
         llptr->info = num;
@@ -105,7 +105,7 @@ void reverse(node **llHead)
 ------
 OUTPUT
 ------
-Enter elements: 1 2 3 4 5
+Enter elements (-999 to stop): 1 2 3 4 5 -999
 Original linked list: 1 -> 2 -> 3 -> 4 -> 5
 Reversed linked list: 5 -> 4 -> 3 -> 2 -> 1
 */
