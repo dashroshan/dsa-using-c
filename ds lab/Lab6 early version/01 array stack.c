@@ -1,38 +1,12 @@
+// Implement stack operations using array: (a) Push (b) Pop (c) Peep (d) Update
+
 #include <stdio.h>
 #define MAX_SIZE 10
 
-int push(int *stack, int *top, int element)
-{
-    if (*top >= MAX_SIZE - 1)
-        return 0;
-    *top += 1;
-    stack[*top] = element;
-    return 1;
-}
-
-int pop(int *stack, int *top)
-{
-    if (*top <= -1)
-        return NULL;
-    *top -= 1;
-    return stack[*top + 1];
-}
-
-int peep(int *stack, int *top, int fromTop)
-{
-    if (fromTop > *top)
-        return NULL;
-    return stack[*top - fromTop];
-}
-
-int update(int *stack, int *top, int fromTop, int element)
-{
-    if (fromTop > *top)
-        return NULL;
-    int oldElement = stack[*top - fromTop];
-    stack[*top - fromTop] = element;
-    return oldElement;
-}
+int pop(int *, int *);
+int push(int *, int *, int);
+int peep(int *, int *, int);
+int update(int *, int *, int, int);
 
 int main()
 {
@@ -85,3 +59,78 @@ loop:
     }
     return 0;
 }
+
+int push(int *stack, int *top, int element)
+{
+    if (*top >= MAX_SIZE - 1)
+        return 0;
+    *top += 1;
+    stack[*top] = element;
+    return 1;
+}
+
+int pop(int *stack, int *top)
+{
+    if (*top <= -1)
+        return NULL;
+    *top -= 1;
+    return stack[*top + 1];
+}
+
+int peep(int *stack, int *top, int fromTop)
+{
+    if (fromTop > *top)
+        return NULL;
+    return stack[*top - fromTop];
+}
+
+int update(int *stack, int *top, int fromTop, int element)
+{
+    if (fromTop > *top)
+        return NULL;
+    int oldElement = stack[*top - fromTop];
+    stack[*top - fromTop] = element;
+    return oldElement;
+}
+
+/*
+------
+OUTPUT
+------
+(1)
+a: Push
+b: Pop
+c: Peep
+d: Update
+
+Enter your choice: a
+
+(2)
+Enter element to push: 1
+1 pushed to stack
+[MENU]
+Enter your choice: a
+
+(3)
+Enter element to push: 2
+2 pushed to stack
+[MENU]
+Enter your choice: c
+
+(4)
+Enter index to peep from top: 1
+1 is at 1 positions from the top
+[MENU]
+Enter your choice: d
+
+(5)
+Enter new element and index to update from top: 4 0
+2 at 0 positions from top is updated with 4
+[MENU]
+Enter your choice: b
+
+(6)
+4 popped from stack
+[MENU]
+Enter your choice:
+*/

@@ -1,0 +1,7 @@
+1. WAP to implement linear queue using array.
+2. WAP to implement linear queue using linklist.
+3. WAP to implement circular queue using array. 
+4. WAP to implement circular queue using linklist.
+5. WAP to implement double-ended queue using array.
+6. WAP to implement double ended queue using linklist.
+7. Reverse a queue using recursion.

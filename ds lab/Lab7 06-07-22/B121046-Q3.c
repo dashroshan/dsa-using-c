@@ -5,11 +5,11 @@
 
 typedef struct nodeStruct
 {
-    char info;
+    int info;
     struct nodeStruct *link;
 } node;
 
-void push(node **, char);
+void push(node **, int);
 int pop(node **);
 
 int main()
@@ -44,7 +44,7 @@ loop:
     return 0;
 }
 
-void push(node **top, char info)
+void push(node **top, int info)
 {
     node *new = (node *)malloc(sizeof(node));
     new->info = info;

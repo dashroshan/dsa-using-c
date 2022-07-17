@@ -12,7 +12,7 @@ typedef struct nodeStruct
 int pop(node **);
 node *create(void);
 void reverse(node **);
-void push(node **, char);
+void push(node **, int);
 void display(node *, char *);
 
 int main()
@@ -66,7 +66,7 @@ void display(node *first, char *text)
     printf("\n");
 }
 
-void push(node **top, char info)
+void push(node **top, int info)
 {
     node *new = (node *)malloc(sizeof(node));
     new->info = info;
