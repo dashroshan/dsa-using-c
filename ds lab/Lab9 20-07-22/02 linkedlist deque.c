@@ -3,149 +3,133 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+typedef struct nodeStruct
 {
     int data;
-    struct node *previous, *next;
-};
+    struct nodeStruct *previous, *next;
+} node;
 
-struct node *head = NULL, *tail = NULL;
+node *createNode(int);
+void insertBeg(node **, int);
+void insertEnd(node **, int);
+int deleteBeg(node **, node **);
+int deleteEnd(node **, node **);
+void initialize(node **, node **);
 
-struct node *createNode(int data)
+int main()
 {
-    struct node *nnode = (struct node *)malloc(sizeof(struct node));
+    node *head = NULL, *tail = NULL;
+    initialize(&head, &tail);
+    int element;
+    char choice;
+loop:
+    printf("\na: Insert at beginning\nb: Insert at end\nc: Delete from beginning\nd: Delete from end\n\nEnter your choice: ");
+    fflush(stdin);
+    scanf("%c", &choice);
+    fflush(stdin);
+    system("cls");
+    switch (choice)
+    {
+    case 'a':
+        printf("Enter element to insert: ");
+        scanf("%d", &element);
+        insertBeg(&head, element);
+        printf("%d inserted at beginning\n", element);
+        goto loop;
+    case 'b':
+        printf("Enter element to insert: ");
+        scanf("%d", &element);
+        insertEnd(&tail, element);
+        printf("%d inserted at end\n", element);
+        goto loop;
+    case 'c':
+        element = deleteBeg(&head, &tail);
+        if (element != NULL)
+            printf("%d deleted from beginning\n", element);
+        else
+            printf("Deletion failed due to deque underflow\n");
+        goto loop;
+    case 'd':
+        element = deleteEnd(&head, &tail);
+        if (element != NULL)
+            printf("%d deleted from end\n", element);
+        else
+            printf("Deletion failed due to deque underflow\n");
+        goto loop;
+    default:
+        goto loop;
+    }
+    return 0;
+}
+
+node *createNode(int data)
+{
+    node *nnode = (node *)malloc(sizeof(node));
     nnode->data = data;
     nnode->next = nnode->previous = NULL;
-    return (nnode);
+    return nnode;
 }
 
-void createSentinels()
+void initialize(node **head, node **tail)
 {
-    head = createNode(0);
-    tail = createNode(0);
-    head->next = tail;
-    tail->previous = head;
+    *head = createNode(0);
+    *tail = createNode(0);
+    (*head)->next = *tail;
+    (*tail)->previous = *head;
 }
 
-void enqueueAtFront(int data)
+void insertBeg(node **head, int data)
 {
-    struct node *nnode, *temp;
+    node *nnode, *temp;
     nnode = createNode(data);
-    temp = head->next;
-    head->next = nnode;
-    nnode->previous = head;
+    temp = (*head)->next;
+    (*head)->next = nnode;
+    nnode->previous = *head;
     nnode->next = temp;
     temp->previous = nnode;
 }
 
-void enqueueAtRear(int data)
+void insertEnd(node **tail, int data)
 {
-    struct node *nnode, *temp;
+    node *nnode, *temp;
     nnode = createNode(data);
-    temp = tail->previous;
-    tail->previous = nnode;
-    nnode->next = tail;
+    temp = (*tail)->previous;
+    (*tail)->previous = nnode;
+    nnode->next = *tail;
     nnode->previous = temp;
     temp->next = nnode;
 }
 
-void dequeueAtFront()
+int deleteBeg(node **head, node **tail)
 {
-    struct node *temp;
-    if (head->next == tail)
-    {
-        printf("Queue is empty\n");
-    }
+    node *temp;
+    int deleted;
+    if ((*head)->next == *tail)
+        return NULL;
     else
     {
-        temp = head->next;
-        head->next = temp->next;
-        temp->next->previous = head;
+        temp = (*head)->next;
+        (*head)->next = temp->next;
+        temp->next->previous = *head;
+        deleted = temp->data;
         free(temp);
     }
-    return;
+    return deleted;
 }
 
-void dequeueAtRear()
+int deleteEnd(node **head, node **tail)
 {
-    struct node *temp;
-    if (tail->previous == head)
-    {
-        printf("Queue is empty\n");
-    }
+    node *temp;
+    int deleted;
+    if ((*tail)->previous == *head)
+        return NULL;
     else
     {
-        temp = tail->previous;
-        tail->previous = temp->previous;
-        temp->previous->next = tail;
+        temp = (*tail)->previous;
+        (*tail)->previous = temp->previous;
+        temp->previous->next = *tail;
+        deleted = temp->data;
         free(temp);
     }
-    return;
-}
-
-void display()
-{
-    struct node *temp;
-
-    if (head->next == tail)
-    {
-        printf("Queue is empty\n");
-        return;
-    }
-
-    temp = head->next;
-    while (temp != tail)
-    {
-        printf("%-3d", temp->data);
-        temp = temp->next;
-    }
-    printf("\n");
-}
-
-int main()
-{
-    int data, ch;
-    createSentinels();
-    while (1)
-    {
-        printf("1. Enqueue at front\n2. Enqueue at rear\n");
-        printf("3. Dequeue at front\n4. Dequeue at rear\n");
-        printf("5. Display\n6. Exit\n");
-        printf("Enter your choice:");
-        scanf("%d", &ch);
-        switch (ch)
-        {
-        case 1:
-            printf("Enter the data to insert:");
-            scanf("%\nd", &data);
-            enqueueAtFront(data);
-            break;
-
-        case 2:
-            printf("Enter your data to insert:");
-            scanf("\n%d", &data);
-            enqueueAtRear(data);
-            break;
-
-        case 3:
-            dequeueAtFront();
-            break;
-
-        case 4:
-            dequeueAtRear();
-            break;
-
-        case 5:
-            display();
-            break;
-
-        case 6:
-            exit(0);
-
-        default:
-            printf("Plsease enter correct option\n");
-            break;
-        }
-    }
-    return 0;
+    return deleted;
 }
