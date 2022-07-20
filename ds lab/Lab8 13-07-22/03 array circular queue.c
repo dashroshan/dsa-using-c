@@ -28,7 +28,7 @@ loop:
     case 'b':
         result = delete (queue, &front, &rear);
         if (result == NULL)
-            printf("Insertion failed due to circular queue underflow\n");
+            printf("Deletion failed due to circular queue underflow\n");
         else
             printf("%d deleted from the circular queue\n", result);
     default:

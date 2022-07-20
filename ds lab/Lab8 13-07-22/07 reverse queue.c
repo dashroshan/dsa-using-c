@@ -36,9 +36,11 @@ loop:
             printf("Insertion failed due to linear queue underflow\n");
         else
             printf("%d deleted from the linear queue\n", element);
+        goto loop;
     case 'c':
         reverse(&front, &rear);
         printf("Queue reversed!\n");
+        goto loop;
     default:
         goto loop;
     }

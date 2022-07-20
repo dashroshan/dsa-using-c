@@ -8,7 +8,7 @@ int deleteEnd(int *, int *, int *);
 int insertEnd(int *, int *, int *, int);
 int insertBeg(int *, int *, int *, int);
 
-main()
+int main()
 {
     int deque[MAX], l = -1, r = -1, element;
     char choice;

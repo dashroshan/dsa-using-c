@@ -5,6 +5,7 @@
 
 int *input(int *);
 void insertionSort(int *, int);
+void display(int *, int, char *);
 
 int main()
 {

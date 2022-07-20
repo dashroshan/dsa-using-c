@@ -35,6 +35,7 @@ loop:
             printf("Insertion failed due to circular queue underflow\n");
         else
             printf("%d deleted from the circular queue\n", element);
+        goto loop;
     default:
         goto loop;
     }

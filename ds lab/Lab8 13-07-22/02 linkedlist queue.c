@@ -32,7 +32,7 @@ loop:
     case 'b':
         element = delete (&front, &rear);
         if (element == NULL)
-            printf("Insertion failed due to linear queue underflow\n");
+            printf("Deletion failed due to linear queue underflow\n");
         else
             printf("%d deleted from the linear queue\n", element);
     default:
