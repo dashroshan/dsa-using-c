@@ -116,9 +116,7 @@ int **powerOfAdjMat(int **g, int v)
 void floydWarshall(int **g, int v)
 {
     for (int k = 0; k < v; k++)
-    {
         for (int i = 0; i < v; i++)
-        {
             for (int j = 0; j < v; j++)
             {
                 int oldPath = g[i][j];
@@ -132,8 +130,6 @@ void floydWarshall(int **g, int v)
                 else
                     g[i][j] = (newPath < oldPath) ? newPath : oldPath;
             }
-        }
-    }
 }
 
 /*

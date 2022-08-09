@@ -12,20 +12,20 @@ typedef struct tree_node
 
 void create(node **);
 node *insert(node *, int);
-void displayPreorder(node *);
-void displayInorder(node *);
-void displayPostorder(node *);
+void preorder(node *);
+void inorder(node *);
+void postorder(node *);
 
 void main()
 {
     node *root = NULL;
     create(&root);
     printf("\nPreorder : ");
-    displayPreorder(root);
+    preorder(root);
     printf("\nInorder  : ");
-    displayInorder(root);
+    inorder(root);
     printf("\nPostorder: ");
-    displayPostorder(root);
+    postorder(root);
 }
 
 void create(node **root)
@@ -57,30 +57,30 @@ node *insert(node *root, int element)
     return root;
 }
 
-void displayPreorder(node *root)
+void preorder(node *root)
 {
     if (root == NULL)
         return;
     printf("%d ", root->info);
-    displayPreorder(root->left);
-    displayPreorder(root->right);
+    preorder(root->left);
+    preorder(root->right);
 }
 
-void displayInorder(node *root)
+void inorder(node *root)
 {
     if (root == NULL)
         return;
-    displayInorder(root->left);
+    inorder(root->left);
     printf("%d ", root->info);
-    displayInorder(root->right);
+    inorder(root->right);
 }
 
-void displayPostorder(node *root)
+void postorder(node *root)
 {
     if (root == NULL)
         return;
-    displayPostorder(root->left);
-    displayPostorder(root->right);
+    postorder(root->left);
+    postorder(root->right);
     printf("%d ", root->info);
 }
 
