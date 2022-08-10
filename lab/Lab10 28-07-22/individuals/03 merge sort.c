@@ -38,7 +38,8 @@ void mergeSort(int array[], int low, int high)
 {
     if (low >= high)
         return;
-    int mid = low + (high - low) / 2;
+    // int mid = low + (high - low) / 2;
+    int mid = (high + low) / 2;
     mergeSort(array, low, mid);
     mergeSort(array, mid + 1, high);
 

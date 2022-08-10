@@ -17,7 +17,7 @@ void main()
     {
         if (isdigit(*e))
         {
-            num = *e - 48;
+            num = *e - '0';
             push(num);
         }
         else

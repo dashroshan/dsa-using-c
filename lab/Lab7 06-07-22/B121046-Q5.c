@@ -13,11 +13,31 @@ node *create(void);
 void reverse(node **);
 void display(node *, char *);
 
+void reverse2(node **head)
+{
+    node *prev = NULL;
+    node *current = *head;
+    node *next = NULL;
+    while (current != NULL)
+    {
+        // Store next
+        next = current->link;
+
+        // Reverse current node's pointer
+        current->link = prev;
+
+        // Move pointers one position ahead.
+        prev = current;
+        current = next;
+    }
+    *head = prev;
+}
+
 int main()
 {
     node *llHead = create();
     display(llHead, "Original");
-    reverse(&llHead);
+    reverse2(&llHead);
     display(llHead, "Reversed");
     return (0);
 }
